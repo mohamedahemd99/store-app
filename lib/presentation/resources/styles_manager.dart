@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:store/presentation/resources/color_manager.dart';
 import 'package:store/presentation/resources/font_manager.dart';
 
 TextStyle _style(double fontSize,String fontFamily,Color color,FontWeight fontWeight){

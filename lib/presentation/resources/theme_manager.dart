@@ -47,12 +47,13 @@ ThemeData getAppTheme(){
     textTheme: TextTheme(
       headline1:getSemiBoldStyle(color: ColorManager.darkGrey,fontSize: FontSize.s16) ,
       subtitle1:getMediumStyle(color: ColorManager.lightGrey,fontSize: FontSize.s14) ,
+      subtitle2:getMediumStyle(color: ColorManager.primary,fontSize: FontSize.s16) ,
       caption: getRegularStyle(color: ColorManager.grey1),
       bodyText1:getRegularStyle(color: ColorManager.grey),
     ),
     //input decoration theme
     inputDecorationTheme: InputDecorationTheme(
-      contentPadding:EdgeInsets.all(AppSize.s8) ,
+      contentPadding:const EdgeInsets.all(AppSize.s8) ,
       //label style
       labelStyle: getMediumStyle(color:ColorManager.darkGrey),
       //hint style
