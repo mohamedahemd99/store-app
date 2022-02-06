@@ -1,11 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:store/data/data_source/remote_data_source.dart';
+import 'package:store/data/network/error%20handler.dart';
 import 'package:store/data/network/failure.dart';
 import 'package:store/data/network/network_info.dart';
 import 'package:store/data/request/request.dart';
 import 'package:store/data/mapper/mapper.dart';
-import 'package:store/domain/model.dart';
-import 'package:store/domain/repository.dart';
+import 'package:store/domain/model/model.dart';
+import 'package:store/domain/repository/repository.dart';
 
 class RepositoryImplementer implements Repository {
   final RemoteDataSource _remoteDataSource;
@@ -17,20 +18,27 @@ class RepositoryImplementer implements Repository {
   Future<Either<Failure, Authentication>> login(
       LoginRequest loginRequest) async {
     if (await _connection.isConnected) {
-      // safe to call api
-      final response = await _remoteDataSource.login(loginRequest);
-      if (response.status == 0) {
-        //return right response data
-        return Right(response.toDomain());
-      } else {
-        //return bussinuss error
-        //return left
-        return Left(Failure(409, response.message ?? "error from server side"));
+      try{
+        final response = await _remoteDataSource.login(loginRequest);
+        if (response.status == ApiInternalStatus.SUCCESS) {
+          //return right response data
+          return Right(response.toDomain());
+        }
+        else {
+          //return business error
+          //return left
+          return Left(Failure(response.status??ApiInternalStatus.FAILURE,response.message??ResponseMessage.DEFAULT));
+        }
       }
+      catch(error){
+        return (Left(ErrorHandler.handle(error).failure));
+      }
+      // safe to call api
+
     }
     //isConnection is false
     else {
-      return Left(Failure(501, "check your internet connection"));
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
 }
