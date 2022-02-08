@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:store/domain/model/model.dart';
 import 'package:store/presentation/base/base_view_model.dart';
 import 'package:store/presentation/resources/assets_manager.dart';
@@ -9,7 +8,7 @@ class OnBoardingViewModel extends BaseViewModel
     with OnBoardingViewModelInputs, OnBoardingViewModelOutputs {
   //stream controller
   final StreamController _streamController =
-      StreamController<SlideViewObject>();
+      StreamController<SlideViewObject>.broadcast();
   int currentPage = 0;
   late final List<SliderObject> _list ;
 
@@ -74,7 +73,7 @@ class OnBoardingViewModel extends BaseViewModel
 }
 
 //inputs mean the orders that our view model recieve from our view
-abstract class OnBoardingViewModelInputs {
+abstract class OnBoardingViewModelInputs   {
   void goNext(); //when user clicks on right arrow or swipe left
   void goPrevious(); //when user clicks on left arrow or swipe right
   void onPageChanged(int index);

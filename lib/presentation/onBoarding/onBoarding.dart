@@ -48,7 +48,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   Widget _getContentWidget(SlideViewObject? slideViewObject) {
     if (slideViewObject == null) {
-      return Container();
+      return Container(color: ColorManager.white,);
     } else {
       return Scaffold(
         backgroundColor: ColorManager.white,

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:store/presentation/forgot_password/forgot_password.dart';
 import 'package:store/presentation/login/login.dart';
@@ -41,8 +40,8 @@ class RouteGenerator{
   }
   static Route<dynamic>UnDefinedRoute(){
     return MaterialPageRoute(builder: (context) => Scaffold(
-      appBar: AppBar(title:Text(AppStrings.noRouteFound) ,),
-      body: Center(child: Text(AppStrings.noRouteFound),),
+      appBar: AppBar(title:const Text(AppStrings.noRouteFound) ,),
+      body: const Center(child: Text(AppStrings.noRouteFound),),
     ),);
   }
 }

@@ -11,32 +11,39 @@ class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
+
 class _SplashScreenState extends State<SplashScreen> {
-Timer? _timer;
-_startDelay(){
-  _timer=Timer(const Duration(seconds: 2),_goNext);
-}
-_goNext(){
-Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
-}
-@override
+  Timer? _timer;
+
+  _startDelay() {
+    _timer = Timer(const Duration(seconds: 2), _goNext);
+  }
+
+  _goNext() {
+    Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
+  }
+
+  @override
   void initState() {
     super.initState();
     _startDelay();
   }
+
   @override
   void dispose() {
     super.dispose();
     _timer?.cancel();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: ColorManager.primary,
-        body: const Center(
-          child:  Image(
-            image: AssetImage(ImageAssets.splashLogo),
-          ),
-        ));
+      backgroundColor: ColorManager.primary,
+      body: const Center(
+        child: Image(
+          image: AssetImage(ImageAssets.splashLogo),
+        ),
+      ),
+    );
   }
 }

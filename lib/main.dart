@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:store/presentation/resources/routes_manager.dart';
 import 'package:store/presentation/resources/theme_manager.dart';
-import 'package:store/presentation/splash/splash.dart';
 
 void main() {
   runApp(const MyApp());

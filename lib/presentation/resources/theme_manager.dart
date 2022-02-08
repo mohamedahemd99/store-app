@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:store/presentation/resources/color_manager.dart';
 import 'package:store/presentation/resources/font_manager.dart';
