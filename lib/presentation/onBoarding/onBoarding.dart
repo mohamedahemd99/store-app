@@ -41,14 +41,24 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return StreamBuilder<SlideViewObject>(
       stream: _onBoardingViewModel.outputSliderViewObject,
       builder: (context, snapshot) {
-        return _getContentWidget(snapshot.data);
+        if(snapshot.data!=null) {
+          print(snapshot.data!.numOfSlides);
+          return _getContentWidget(snapshot.data);
+        } else {
+          return Container();
+        }
       },
     );
   }
 
   Widget _getContentWidget(SlideViewObject? slideViewObject) {
     if (slideViewObject == null) {
-      return Container(color: ColorManager.white,);
+      return Container(
+        color: ColorManager.white,
+        child: const Image(
+          image: AssetImage(ImageAssets.splashLogo),
+        ),
+      );
     } else {
       return Scaffold(
         backgroundColor: ColorManager.white,
@@ -108,12 +118,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             padding: const EdgeInsets.all(AppPadding.p14),
             child: GestureDetector(
               onTap: () {
-                setState(() {
-                  _pageController.animateToPage(
-                      _onBoardingViewModel.goPrevious(),
-                      duration: const Duration(milliseconds: AppDuration.d300),
-                      curve: Curves.bounceInOut);
-                });
+                _pageController.animateToPage(
+                    _onBoardingViewModel.goPrevious(),
+                    duration: const Duration(milliseconds: AppDuration.d300),
+                    curve: Curves.bounceInOut);
               },
               child: SizedBox(
                 height: AppSize.s20,
@@ -135,11 +143,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             padding: const EdgeInsets.all(AppPadding.p14),
             child: GestureDetector(
               onTap: () {
-                setState(() {
-                  _pageController.animateToPage(_onBoardingViewModel.goNext(),
-                      duration: const Duration(milliseconds: AppDuration.d300),
-                      curve: Curves.bounceInOut);
-                });
+                _pageController.animateToPage(_onBoardingViewModel.goNext(),
+                    duration:  const Duration(milliseconds: AppDuration.d300),
+                    curve: Curves.bounceInOut);
               },
               child: SizedBox(
                 height: AppSize.s20,
@@ -163,9 +169,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 }
 
 class OnBoarding extends StatelessWidget {
-  SliderObject _sliderObject;
+  final SliderObject _sliderObject;
 
-  OnBoarding(this._sliderObject);
+   const OnBoarding(this._sliderObject, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

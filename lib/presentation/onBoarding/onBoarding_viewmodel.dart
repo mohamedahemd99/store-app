@@ -8,7 +8,7 @@ class OnBoardingViewModel extends BaseViewModel
     with OnBoardingViewModelInputs, OnBoardingViewModelOutputs {
   //stream controller
   final StreamController _streamController =
-      StreamController<SlideViewObject>.broadcast();
+      StreamController<SlideViewObject>();
   int currentPage = 0;
   late final List<SliderObject> _list ;
 
@@ -21,6 +21,7 @@ class OnBoardingViewModel extends BaseViewModel
   @override
   void start() {
     _list=_getSliderData();
+    _postDataToView();
   }
 
   @override
@@ -28,6 +29,7 @@ class OnBoardingViewModel extends BaseViewModel
     int nextIndex = currentPage++;
     if (nextIndex == _list.length) {
       currentPage = 0;
+      _postDataToView();
     }
     return currentPage;
   }
@@ -37,6 +39,8 @@ class OnBoardingViewModel extends BaseViewModel
     int previousIndex = currentPage--;
     if (previousIndex == -1) {
       currentPage = _list.length - 1;
+      _postDataToView();
+
     }
     return currentPage;
   }
@@ -49,12 +53,10 @@ class OnBoardingViewModel extends BaseViewModel
 
   @override
   Sink get inputSliderViewObject => _streamController.sink;
-
   //outputs
   @override
   Stream<SlideViewObject> get outputSliderViewObject =>
       _streamController.stream.map((slideViewObject) => slideViewObject);
-
   //private function
   List<SliderObject> _getSliderData() => [
     SliderObject(ImageAssets.onboardingLogo1, AppStrings.onBoardingTitle1,
@@ -66,7 +68,6 @@ class OnBoardingViewModel extends BaseViewModel
     SliderObject(ImageAssets.onboardingLogo4, AppStrings.onBoardingTitle4,
         AppStrings.onBoardingSubTitle4),
   ];
-
   _postDataToView(){
     inputSliderViewObject.add(SlideViewObject(_list[currentPage],currentPage,_list.length));
   }
@@ -91,6 +92,5 @@ class SlideViewObject {
   SliderObject sliderObject;
   int numOfSlides;
   int currentIndex;
-
   SlideViewObject(this.sliderObject, this.currentIndex, this.numOfSlides);
 }

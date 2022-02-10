@@ -29,7 +29,7 @@ class RouteGenerator{
       case Routes.mainRoute:
         return MaterialPageRoute(builder: (context) => const MainViewScreen(),);
       case Routes.onBoardingRoute:
-        return MaterialPageRoute(builder: (context) => const OnBoardingScreen(),);
+        return MaterialPageRoute(builder: (context) =>  OnBoardingScreen(),);
       case Routes.registerRoute:
         return MaterialPageRoute(builder: (context) => const RegisterScreen(),);
       case Routes.storeDetailsRoute:

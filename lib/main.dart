@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:store/app/di.dart';
 import 'package:store/presentation/resources/routes_manager.dart';
 import 'package:store/presentation/resources/theme_manager.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await initAppModule();
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+
+   MyApp();
 
   // This widget is the root of your application.
   @override

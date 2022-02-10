@@ -8,6 +8,9 @@ class AppStrings{
   static const String onBoardingSubTitle2="Tut app is an awesome flutter application using clean architecture #2";
   static const String onBoardingSubTitle3="Tut app is an awesome flutter application using clean architecture #3";
   static const String onBoardingSubTitle4="Tut app is an awesome flutter application using clean architecture #4";
+  static const String login="Login";
+  static const String forgetPassword="forget password";
+  static const String registerText="Not a member? Sign up";
   static const String skip="Skip";
   static const String userName="UserName";
   static const String userNameError="UserName is invalid";

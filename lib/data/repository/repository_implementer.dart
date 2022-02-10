@@ -16,6 +16,7 @@ class RepositoryImplementer implements Repository {
 
   @override
   Future<Either<Failure, Authentication>> login(LoginRequest loginRequest) async {
+    print(_connection.isConnected);
     if (await _connection.isConnected) {
       try{
         final response = await _remoteDataSource.login(loginRequest);
