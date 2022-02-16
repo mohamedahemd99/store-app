@@ -62,7 +62,7 @@ class ErrorHandler implements Exception {
       case DioErrorType.cancel:
         return DataSource.CANCEL.getFailure();
 
-      case DioErrorType.other:
+      case DioErrorType. other:
         return DataSource.DEFAULT.getFailure();
     }
   }

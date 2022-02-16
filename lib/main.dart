@@ -4,8 +4,10 @@ import 'package:store/presentation/resources/routes_manager.dart';
 import 'package:store/presentation/resources/theme_manager.dart';
 
 void main() async{
+
   WidgetsFlutterBinding.ensureInitialized();
   await initAppModule();
+
   runApp( MyApp());
 }
 

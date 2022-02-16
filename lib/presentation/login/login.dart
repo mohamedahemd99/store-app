@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:store/app/di.dart';
 import 'package:store/presentation/login/login_viewmodel.dart';
 import 'package:store/presentation/resources/assets_manager.dart';
 import 'package:store/presentation/resources/routes_manager.dart';
@@ -16,7 +16,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final LoginViewModel _viewModel = LoginViewModel();
+  final LoginViewModel _viewModel = instance<LoginViewModel>();
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey _formKey = GlobalKey<FormState>();
