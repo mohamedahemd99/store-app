@@ -83,10 +83,12 @@ class LoginViewModel extends BaseViewModel
       _allValidStreamController.stream.map((_) => _isAllInputsValid());
 
   bool _isPasswordValid(String password) {
+    _validate();
     return password.length>=8;
   }
 
   bool _isUserNameValid(String userName) {
+    _validate();
     return userName.contains("@")&&userName.contains(".com");
   }
 

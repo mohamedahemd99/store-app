@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:store/app/di.dart';
+import 'package:store/challenge/widget/layout_screen.dart';
 import 'package:store/presentation/resources/routes_manager.dart';
 import 'package:store/presentation/resources/theme_manager.dart';
 
@@ -22,7 +23,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme:getAppTheme(),
      onGenerateRoute:RouteGenerator.getRoute ,
-      initialRoute: Routes.splashRoute,
+      // initialRoute: Routes.splashRoute,
+      home:Test(),
     );
   }
 }
+

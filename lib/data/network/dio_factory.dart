@@ -5,37 +5,40 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:store/app/app_prefs.dart';
 import 'package:store/app/constant.dart';
 
-const String APPLICATION_JSON="application/json";
-const String CONTENT_TYPE="content-type";
-const String ACCEPT="accept";
-const String AUTHORIZATION="authorization";
-const String DEFAULT_LANGUAGE="language";
+const String APPLICATION_JSON = "application/json";
+const String CONTENT_TYPE = "content-type";
+const String ACCEPT = "accept";
+const String AUTHORIZATION = "authorization";
+const String DEFAULT_LANGUAGE = "language";
 
-class DioFactory{
+class DioFactory {
   late AppPreferences _appPreferences;
+
   DioFactory(this._appPreferences);
-  Future<Dio> getDio()async{
-    Dio dio=Dio();
-    int _timeOut =60*1000;//1 min
-    String language=await _appPreferences.getAppLanguage();
-    Map<String,String> headers={
-      CONTENT_TYPE:APPLICATION_JSON,
-      ACCEPT:APPLICATION_JSON,
-      AUTHORIZATION:Constant.token,
-      DEFAULT_LANGUAGE:language,
+
+  Future<Dio> getDio() async {
+    Dio dio = Dio();
+    int _timeOut = 60 * 1000; //1 min
+    String language = await _appPreferences.getAppLanguage();
+    Map<String, String> headers = {
+      CONTENT_TYPE: APPLICATION_JSON,
+      ACCEPT: APPLICATION_JSON,
+      AUTHORIZATION: Constant.token,
+      DEFAULT_LANGUAGE: language,
     };
-    dio.options=BaseOptions(
-      baseUrl: Constant.baseUrl,
-      connectTimeout: _timeOut,
-      receiveTimeout: _timeOut,
-      headers: headers
+    dio.options = BaseOptions(
+        baseUrl: Constant.baseUrl,
+        connectTimeout: _timeOut,
+        receiveTimeout: _timeOut,
+        headers: headers
     );
-    if(kReleaseMode){
+    if (kReleaseMode) { 
       if (kDebugMode) {
         print("release mode no logs");
       }
-    }else{
-      dio.interceptors.add(PrettyDioLogger(requestHeader:true,requestBody:true,responseHeader:true ));
+    } else {
+      dio.interceptors.add(PrettyDioLogger(
+          requestHeader: true, requestBody: true, responseHeader: true));
     }
     return dio;
   }

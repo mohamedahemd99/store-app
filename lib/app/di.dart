@@ -40,8 +40,8 @@ Future<void> initAppModule() async {
 }
 
 initLoginModel() {
-  if (!GetIt.I.isRegistered()) {
+
     instance.registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
     instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
-  }
+
 }

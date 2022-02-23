@@ -19,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final LoginViewModel _viewModel = instance<LoginViewModel>();
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final GlobalKey _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   _build() {
     _viewModel.start();
@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Container(
         padding: const EdgeInsets.only(top: AppPadding.p100),
         child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
+          physics:  BouncingScrollPhysics(),
           child: Form(
             key: _formKey,
             child: Column(
@@ -95,12 +95,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           obscureText: true,
                           keyboardType: TextInputType.emailAddress,
                           controller: _passwordController,
+                          autofillHints: [AutofillHints.email],
                           decoration: InputDecoration(
                             hintText: AppStrings.password,
                             labelText: AppStrings.password,
                             errorText: (snapshotPassword.data ?? true)
                                 ? null
                                 : AppStrings.passwordError,
+
                           ),
                         );
                       }),
@@ -118,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         stream: _viewModel.outputIsAllInputsValid,
                         builder: (context, snapshot) {
                           return ElevatedButton(
-                              onPressed: (snapshot.data ?? false)
+                              onPressed: (snapshot.data?? false)
                                   ? () async{
                                      await _viewModel.login();
                                     }
