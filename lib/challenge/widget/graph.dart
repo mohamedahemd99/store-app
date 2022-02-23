@@ -30,7 +30,9 @@ class _GraphScreenState extends State<GraphScreen> {
         tooltipBehavior: _tooltip,
         series: <ChartSeries<SalesData, String>>[
           ColumnSeries<SalesData, String>(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(5),
+            spacing:2 ,
+
             // Bind data source
             dataSource: <SalesData>[
               SalesData('Jan', orders[0]),
