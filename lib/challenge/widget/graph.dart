@@ -11,9 +11,14 @@ class GraphScreen extends StatefulWidget {
 }
 
 class _GraphScreenState extends State<GraphScreen> {
+  late List<SalesData> data;
+  late TooltipBehavior _tooltip;
+
   @override
   void initState() {
     super.initState();
+    _tooltip = TooltipBehavior(enable: true);
+
     getOrdersPerMonth();
   }
 
@@ -22,8 +27,9 @@ class _GraphScreenState extends State<GraphScreen> {
     return SfCartesianChart(
         primaryXAxis: CategoryAxis(title: AxisTitle(text: "Times/Month")),
         primaryYAxis: CategoryAxis(title: AxisTitle(text: "Orders")),
-        series: <BarSeries<SalesData, String>>[
-          BarSeries<SalesData, String>(
+        tooltipBehavior: _tooltip,
+        series: <ChartSeries<SalesData, String>>[
+          ColumnSeries<SalesData, String>(
             borderRadius: BorderRadius.circular(15),
             // Bind data source
             dataSource: <SalesData>[
@@ -33,7 +39,7 @@ class _GraphScreenState extends State<GraphScreen> {
               SalesData('Apr', orders[3]),
               SalesData('May', orders[4]),
               SalesData('Jun', orders[5]),
-              SalesData('Juls', orders[6]),
+              SalesData('Jul', orders[6]),
               SalesData('Aug', orders[7]),
               SalesData('Sep', orders[8]),
               SalesData('Oct', orders[9]),
@@ -42,14 +48,15 @@ class _GraphScreenState extends State<GraphScreen> {
             ],
             xValueMapper: (SalesData sales, _) => sales.month,
             yValueMapper: (SalesData sales, _) => sales.sales,
-          )
+
+            animationDuration: 2000,
+          ),
         ]);
   }
 }
 
 class SalesData {
   SalesData(this.month, this.sales);
-
   final String month;
   final int sales;
 }
